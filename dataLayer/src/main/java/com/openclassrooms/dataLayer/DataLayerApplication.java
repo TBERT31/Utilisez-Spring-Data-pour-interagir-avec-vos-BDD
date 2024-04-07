@@ -20,10 +20,10 @@ import javax.transaction.Transactional;
 public class DataLayerApplication implements CommandLineRunner {
 
 	@Autowired
-	private CategoryService categoryService;
+	private ProductService productService;
 
 	@Autowired
-	private ProductService productService;
+	private CategoryService categoryService;
 
 	@Autowired
 	private CommentService commentService;
@@ -41,6 +41,20 @@ public class DataLayerApplication implements CommandLineRunner {
 
 		searchResults = productService.getProductsByCategoryName("Standard");
 		searchResults.forEach(product -> System.out.println(product.getName()));
+
+		searchResults = productService.getProductsByCostLessThan(1000);
+		searchResults.forEach(product -> System.out.println(product.getName()));
+
+		Iterable<Category> searchCategory = categoryService.getCategoryByName("Standard");
+		searchCategory.forEach(category -> System.out.println(category.getCategoryId()));
+
+		searchCategory = categoryService.getCategoriesByProductName("AssuranceTousRisques");
+		searchCategory.forEach(category -> System.out.println(category.getName()));
+
+		Iterable<Comment> searchComments = commentService.getCommentContaining("deçu");
+		searchComments.forEach(comment -> System.out.println(comment.getContent()));
+
 	}
+
 }
 
