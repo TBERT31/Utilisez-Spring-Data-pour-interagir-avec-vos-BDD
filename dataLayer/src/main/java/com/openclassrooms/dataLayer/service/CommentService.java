@@ -1,5 +1,6 @@
 package com.openclassrooms.dataLayer.service;
 
+import java.security.PublicKey;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,4 +23,7 @@ public class CommentService {
         return commentRepository.findById(id);
     }
 
+    public Comment addComment(Comment comment) {
+        return commentRepository.save(comment);
+    }
 }
