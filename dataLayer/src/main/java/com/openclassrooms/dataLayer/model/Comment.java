@@ -15,18 +15,13 @@ public class Comment {
     private String content;
 
     @ManyToOne(
-            cascade = CascadeType.ALL
+            cascade = {
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE
+            }
     )
-    @JoinColumn(name = "produit_id")
+    @JoinColumn(name="produit_id")
     private Product product;
-
-    public Product getProduct() {
-        return product;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
-    }
 
     public int getCommentId() {
         return commentId;
@@ -42,6 +37,14 @@ public class Comment {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
 }

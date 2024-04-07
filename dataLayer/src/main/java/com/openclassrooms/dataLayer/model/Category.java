@@ -30,14 +30,6 @@ public class Category {
     )
     private List<Product> products = new ArrayList<>();
 
-    public List<Product> getProducts() {
-        return products;
-    }
-
-    public void setProducts(List<Product> products) {
-        this.products = products;
-    }
-
     public int getCategoryId() {
         return categoryId;
     }
@@ -52,6 +44,14 @@ public class Category {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
     }
 
     public void addProduct(Product product) {

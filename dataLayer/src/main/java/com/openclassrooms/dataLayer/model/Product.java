@@ -7,6 +7,7 @@ import java.util.List;
 @Entity
 @Table(name = "produit")
 public class Product {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "produit_id")
@@ -26,29 +27,16 @@ public class Product {
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
-    private List<Comment> comments = new ArrayList<>();
+    List<Comment> comments = new ArrayList<>();
 
     @ManyToMany(
             mappedBy = "products",
-            cascade = CascadeType.ALL
+            cascade = {
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE
+            }
     )
-    List<Category> categories = new ArrayList<>();
-
-    public List<Comment> getComments() {
-        return comments;
-    }
-
-    public void setComments(List<Comment> comments) {
-        this.comments = comments;
-    }
-
-    public List<Category> getCategories() {
-        return categories;
-    }
-
-    public void setCategories(List<Category> categories) {
-        this.categories = categories;
-    }
+    private List<Category> categories = new ArrayList<>();
 
     public int getProductId() {
         return productId;
@@ -82,6 +70,22 @@ public class Product {
         this.cost = cost;
     }
 
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
+
+    public List<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(List<Category> categories) {
+        this.categories = categories;
+    }
+
     public void addComment(Comment comment) {
         comments.add(comment);
         comment.setProduct(this);
@@ -91,6 +95,5 @@ public class Product {
         comments.remove(comment);
         comment.setProduct(null);
     }
-
 
 }
