@@ -2,6 +2,7 @@ package com.openclassrooms.dataLayer.service;
 
 import java.util.Optional;
 
+import com.openclassrooms.dataLayer.model.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +25,10 @@ public class ProductService {
 
     public Iterable<Product> getProductsByName(String name) {
         return productRepository.findByName(name);
+    }
+
+    public Iterable<Product> getProductsByCategoryName(String name) {
+        return productRepository.findByCategoriesName(name);
     }
 
     public Product saveProduct(Product product) {
